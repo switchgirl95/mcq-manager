@@ -1,0 +1,9 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: MCQProject
+  pool: 5
+  username: root
+  password: 7858
+  host: localhost

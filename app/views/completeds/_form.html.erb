@@ -1,0 +1,27 @@
+<%= form_with(model: completed, local: true) do |form| %>
+  <% if completed.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(completed.errors.count, "error") %> prohibited this completed from being saved:</h2>
+
+      <ul>
+      <% completed.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :true %>
+    <%= form.check_box :true, id: :completed_true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_touched %>
+    <%= form.date_select :last_touched, id: :completed_last_touched %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MCQProj</title>
+   
+    <%= mathjax_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+     <%= csrf_meta_tags %>
+    <%= yield :head %>
+  </head>
+
+  <body class="fixed-left">
+
+  				<div id="wrapper">
+
+						<!-- Top Bar Start -->
+						<div class="topbar">
+
+								<!-- LOGO -->
+								<div class="topbar-left">
+										<div class="text-center">
+												<a href="index.html" class="logo"><i class="icon-magnet icon-c-logo"></i><span>MCQ Proj</span></a>
+										</div>
+										
+								</div>
+
+								<!-- Button mobile view to collapse sidebar menu -->
+								<div class="navbar navbar-default" role="navigation">
+										<div class="container">
+												<div class="">
+														<!--<div class="pull-left">
+																<button class="button-menu-mobile open-left">
+																		<i class="ion-navicon"></i>
+																</button>
+																<span class="clearfix"></span>
+														</div>
+
+														<form role="search" class="navbar-left app-search pull-left hidden-xs">
+																<input type="text" placeholder="Search..." class="form-control">
+																<a href=""><i class="fa fa-search"></i></a>
+														</form>-->
+
+
+														<ul class="nav navbar-nav navbar-right pull-right">
+														</ul>
+												</div>
+												<!--/.nav-collapse -->
+										</div>
+								</div>
+						</div>
+						<!-- Top Bar End -->
+
+
+						<!-- ========== Left Sidebar Start ========== -->
+
+						<div class="left side-menu hidden-xs hidden-sm">
+								<div class="sidebar-inner slimscrollleft">
+								  <div class="user-details">
+			                        <div class="pull-left">
+			                            <img src="Octocat.png" alt="" class="thumb-md img-circle">
+			                        </div>
+                        <div class="user-info">
+                            <div class="dropdown">
+                              <% if session[:status] == "1"%>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><%=Teacher.find(1).nom%> <%=Teacher.find(1).prenoms%><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/teachers/1"><i class="material-icons sm">face</i>Profile<div class="ripple-wrapper"></div></a></li>
+                                    <li><a href="/teachers/1/edit"><i class="material-icons sm">settings</i> Settings</a></li>
+                                    <li><%= link_to logout_path, method: :delete do %><i class="material-icons sm">settings_power</i> Logout<%end%></li>
+                                </ul>
+                              <% elsif session[:status] == "2"%>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><%=Teacher.find(session[:teacher_id]).nom%> <%=Teacher.find(session[:teacher_id]).prenoms%><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/teachers/<%=session[:teacher_id]%>"><i class="material-icons sm">face</i>Profile<div class="ripple-wrapper"></div></a></li>
+                                    <li><a href="/teachers/<%=session[:teacher_id]%>/edit"><i class="material-icons sm">settings</i> Settings</a></li>
+                                    <li><%= link_to logout_path, method: :delete do %><i class="material-icons sm">settings_power</i> Logout<%end%></li>
+                                </ul>
+                              <% else %>
+                              
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><%=Student.find(session[:student_id]).nom%> <%=Student.find(session[:student_id]).prenoms%><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/students/<%=session[:student_id]%>"><i class="material-icons sm">face</i>Profile<div class="ripple-wrapper"></div></a></li>
+                                    <li><a href="/students/<%=session[:student_id]%>/edit"><i class="material-icons sm">settings</i> Settings</a></li>
+                                    <li><%= link_to logout_path, method: :delete do %><i class="material-icons sm">settings_power</i> Logout<%end%></li>
+                                </ul>
+                              <%end%>
+                                
+                            </div>
+
+                            <% if session[:status] == "1"%>
+                            <p class="text-muted m-0 text-danger">Administrator Profile</p>
+                            <% elsif session[:status] == "2"%>
+                            <p class="text-muted m-0 text-warning">Teacher Profile</p>
+                            <% else %>
+                            <p class="text-muted m-0 text-default">Student Profile</p>
+                            <%end%><hr>
+                        </div>
+                    </div>
+										<!--- Divider -->
+										<div id="sidebar-menu">
+												<ul>
+
+												<% if session[:status]== "1"%>
+												<li class="text-muted menu-title">Admin Section</li>
+
+														<li class="has_sub">
+																<a href="/static/admin_zone" class="waves-effect"><i class="ti-home"></i> <span> Admin Zone </span> </a>
+																
+														</li>
+														<li class="text-muted menu-title">Teacher Section</li>
+														<li>
+																<a href="/mytests" class="waves-effect"><i class="ti-clipboard"></i> <span> My Tests </span> </a>
+														</li>
+														<li>
+																<a href="/testperf" class="waves-effect"><i class="ti-bar-chart"></i> <span> Test performances </span> </a>
+														</li>
+														
+
+<%elsif session[:status]== "3"%>
+														<li class="text-muted menu-title">Student Section</li>
+
+														<li class="has_sub">
+																<a href="/mysubjects" class="waves-effect"><i class="ti-clipboard"></i> <span> My Subjects </span> </a>
+																
+														</li>
+
+														<li>
+																<a href="/myresults" class="waves-effect"><i class="ti-bar-chart"></i> <span> My Results </span> </a>
+														</li>
+														<%elsif session[:status]== "2" || session[:status]== "1"%>
+														<li class="text-muted menu-title">Teacher Section</li>
+														<li>
+														<li>
+																<a href="/mytests" class="waves-effect"><i class="ti-clipboard"></i> <span> My Tests </span> </a>
+														</li>
+														<li>
+																<a href="/testperf" class="waves-effect"><i class="ti-bar-chart"></i> <span> Test performances </span> </a>
+														</li>
+														<%end%>
+														<li class="text-muted menu-title">Miscellaneous</li>
+														<%if session[:status]== "2" || session[:status]== "1"%>
+														<li>
+																				<a href="/teachers/<%= current_user.id%>/edit" class="waves-effect"><i class="ti-settings"></i><span> Settings </span> </a>
+																				
+														</li>
+														<%else%>
+														<li>
+																				<a href="/students/<%= current_user.id%>/edit" class="waves-effect"><i class="ti-settings"></i><span> Settings </span> </a>
+																				
+														</li>
+														<%end%>
+														<!--<li>
+																				<a href="#" class="waves-effect"><i class="ti-help-alt"></i><span> Help </span> </a>
+																				
+														</li>-->
+														<li>
+																				<a href="/static/about" class="waves-effect" ><i class="ti-info-alt"></i><span> About </span> </a>
+																				
+														</li>
+														
+														
+
+														
+
+														
+
+																		
+
+												</ul>
+												<div class="clearfix"></div>
+										</div>
+										<div class="clearfix"></div>
+								</div>
+						</div>
+						<!-- Left Sidebar End -->
+						<div class="left side-menu hidden-md hidden-lg" style="width:70px">
+								<div class="sidebar-inner slimscrollleft">
+								  
+			                        
+                        
+										<!--- Divider -->
+										<div id="sidebar-menu">
+												<ul>
+
+												<% if session[:status]== "1"%>
+												
+
+														<li class="has_sub">
+																<a href="/static/admin_zone" class="waves-effect"><i class="ti-home"></i></a>
+																
+														</li>
+														<hr>
+														
+														<li>
+																<a href="/mytests" class="waves-effect"><i class="ti-clipboard"></i></a>
+														</li>
+														<li>
+																<a href="/testperf" class="waves-effect"><i class="ti-bar-chart"></i></a>
+														</li>
+														<hr>
+														
+
+<%elsif session[:status]== "3"%>
+													
+
+														<li class="has_sub">
+																<a href="/mysubjects" class="waves-effect"><i class="ti-clipboard"></i></a>
+																
+														</li>
+
+														<li>
+																<a href="/myresults" class="waves-effect"><i class="ti-bar-chart"></i></a>
+														</li>
+														<hr>
+														<%elsif session[:status]== "2" || session[:status]== "1"%>
+														<li>
+														<li>
+																<a href="/mytests" class="waves-effect"><i class="ti-clipboard"></i></a>
+														</li>
+														<li>
+																<a href="/testperf" class="waves-effect"><i class="ti-bar-chart"></i></a>
+														</li>
+														<hr>
+														<%end%>
+														<%if session[:status]== "2" || session[:status]== "1"%>
+														<li>
+																				<a href="/teachers/<%= current_user.id%>/edit" class="waves-effect"><i class="ti-settings"></i></a>
+																				
+														</li>
+														<%else%>
+														<li>
+																				<a href="/students/<%= current_user.id%>/edit" class="waves-effect"><i class="ti-settings"></i></a>
+																				
+														</li>
+														<%end%>
+														<!--<li>
+																				<a href="#" class="waves-effect"><i class="ti-help-alt"></i><span> Help </span> </a>
+																				
+														</li>-->
+														<li>
+																				<a href="/static/about" class="waves-effect" ><i class="ti-info-alt"></i></a>
+																				
+														</li>
+														
+														
+
+														
+
+														
+
+																		
+
+												</ul>
+												<div class="clearfix"></div>
+										</div>
+										<div class="clearfix"></div>
+								</div>
+						</div>
+						
+
+<!-- smaller side end-->
+						<!-- ============================================================== -->
+						<!-- Start right Content here -->
+						<!-- ============================================================== -->
+						<div class="content-page">
+								<!-- Start content -->
+								<div class="content">
+										<div class="container">
+
+												<!-- Page-Title -->
+									
+    										<%= yield %>
+
+
+										</div> <!-- container -->
+
+								</div> <!-- content -->
+						<footer class="footer">
+										2017 © Switch!!
+								</footer>
+
+
+						</div>
+						<!-- ============================================================== -->
+						<!-- End Right content here -->
+						<!-- ============================================================== -->
+
+
+						<!-- Right Sidebar -->
+						<div class="side-bar right-bar nicescroll">
+								<h4 class="text-center">Chat</h4>
+								<div class="contact-list nicescroll">
+										<ul class="list-group contacts-list">
+												<li class="list-group-item">
+														<a href="#">
+																<div class="avatar">
+																		<img src="assets/images/users/avatar-1.jpg" alt="">
+																</div>
+																<span class="name">Chadengle</span>
+																<i class="fa fa-circle online"></i>
+														</a>
+														<span class="clearfix"></span>
+												</li>
+												<li class="list-group-item">
+														<a href="#">
+																<div class="avatar">
+																		<img src="assets/images/users/avatar-2.jpg" alt="">
+																</div>
+																<span class="name">Tomaslau</span>
+																<i class="fa fa-circle online"></i>
+														</a>
+														<span class="clearfix"></span>
+												</li>
+												<li class="list-group-item">
+														<a href="#">
+																<div class="avatar">
+																		<img src="assets/images/users/avatar-3.jpg" alt="">
+																</div>
+																<span class="name">Stillnotdavid</span>
+																<i class="fa fa-circle online"></i>
+														</a>
+														<span class="clearfix"></span>
+												</li>
+												<li class="list-group-item">
+														<a href="#">
+																<div class="avatar">
+																		<img src="assets/images/users/avatar-4.jpg" alt="">
+																</div>
+																<span class="name">Kurafire</span>
+																<i class="fa fa-circle online"></i>
+														</a>
+														<span class="clearfix"></span>
+												</li>
+												<li class="list-group-item">
+														<a href="#">
+																<div class="avatar">
+																		<img src="assets/images/users/avatar-5.jpg" alt="">
+																</div>
+																<span class="name">Shahedk</span>
+																<i class="fa fa-circle away"></i>
+														</a>
+														<span class="clearfix"></span>
+												</li>
+												<li class="list-group-item">
+														<a href="#">
+																<div class="avatar">
+																		<img src="assets/images/users/avatar-6.jpg" alt="">
+																</div>
+																<span class="name">Adhamdannaway</span>
+																<i class="fa fa-circle away"></i>
+														</a>
+														<span class="clearfix"></span>
+												</li>
+												<li class="list-group-item">
+														<a href="#">
+																<div class="avatar">
+																		<img src="assets/images/users/avatar-7.jpg" alt="">
+																</div>
+																<span class="name">Ok</span>
+																<i class="fa fa-circle away"></i>
+														</a>
+														<span class="clearfix"></span>
+												</li>
+												<li class="list-group-item">
+														<a href="#">
+																<div class="avatar">
+																		<img src="assets/images/users/avatar-8.jpg" alt="">
+																</div>
+																<span class="name">Arashasghari</span>
+																<i class="fa fa-circle offline"></i>
+														</a>
+														<span class="clearfix"></span>
+												</li>
+												<li class="list-group-item">
+														<a href="#">
+																<div class="avatar">
+																		<img src="assets/images/users/avatar-9.jpg" alt="">
+																</div>
+																<span class="name">Joshaustin</span>
+																<i class="fa fa-circle offline"></i>
+														</a>
+														<span class="clearfix"></span>
+												</li>
+												<li class="list-group-item">
+														<a href="#">
+																<div class="avatar">
+																		<img src="assets/images/users/avatar-10.jpg" alt="">
+																</div>
+																<span class="name">Sortino</span>
+																<i class="fa fa-circle offline"></i>
+														</a>
+														<span class="clearfix"></span>
+												</li>
+										</ul>
+								</div>
+						</div>
+						<!-- /Right-bar -->
+
+
+				</div>
+				<!-- END wrapper -->
+
+				<script>
+var resizefunc = [];
+				</script>
+
+				<!-- jQuery  -->
+				<script src="assets/js/jquery.min.js"></script>
+				<script src="assets/js/bootstrap.min.js"></script>
+				<script src="assets/js/detect.js"></script>
+				<script src="assets/js/fastclick.js"></script>
+				<script src="assets/js/jquery.slimscroll.js"></script>
+				<script src="assets/js/jquery.blockUI.js"></script>
+				<script src="assets/js/waves.js"></script>
+				<script src="assets/js/wow.min.js"></script>
+				<script src="assets/js/jquery.nicescroll.js"></script>
+				<script src="assets/js/jquery.scrollTo.min.js"></script>
+
+				<script src="assets/js/jquery.core.js"></script>
+				<script src="assets/js/jquery.app.js"></script>
+
+				<script src="assets/plugins/bootstrap-table/dist/bootstrap-table.min.js"></script>
+
+				<script src="assets/pages/jquery.bs-table.js"></script> 
+		
+  
+
+  </body>
+</html>

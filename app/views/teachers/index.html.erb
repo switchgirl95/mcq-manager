@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Teachers</h1>
+<div class="col-sm-12">
+                                <div class="card-box">
+<table id="datatable" class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nom</th>
+      <th>Prenoms</th>
+      
+      <th>Status</th>
+       <th class="col-xs-3 col-sm-2">Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teachers.each do |teacher| %>
+      <tr>
+        <td><%= teacher.id %></td>
+        <td><%= teacher.nom %></td>
+        <td><%= teacher.prenoms %></td>
+       
+        <td><%= teacher.status %></td>
+        <td><div class="col-sm-4"><%= link_to 'Show', teacher %></div>
+        <div class="col-sm-4"><%= link_to edit_teacher_path(teacher) do%><i class="fa fa-pencil"></i>   <% end %></div>
+        <%= link_to teacher, method: :delete, data: { confirm: 'Are you sure?' } do%><i class="fa fa-trash"></i> <% end %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+
+
+
+

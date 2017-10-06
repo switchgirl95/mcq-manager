@@ -1,0 +1,34 @@
+ <%= form_for @department, local: true, :html => {:class => 'form-horizontal m-t-20', 'data-parsley-validate' => ''} do |form| %> 
+
+  <% if department.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(department.errors.count, "error") %> prohibited this department from being saved:</h2>
+
+      <ul>
+      <% department.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group ">
+                            <div class="col-xs-12">
+                                <%= form.label 'department code' %>
+                               <%= form.text_field :dept_code, id: :dept_code, :class => 'form-control',:placeholder => 'Department code',  :required => 'true' %>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                <%= form.label 'department name' %>
+                               <%= form.text_field :dept_name, id: :dept_name, :class => 'form-control',:placeholder => 'Department name',  :required => 'true' %>
+                            </div>
+                        </div>
+                     
+
+                      
+
+  <div class="actions">
+    <%= form.submit 'Submit', :class => 'btn btn-default'%>
+  </div>
+<% end %>

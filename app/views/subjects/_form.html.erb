@@ -1,0 +1,30 @@
+<%= form_for @subject, html: {"data-parsley-validate" => '',:class => 'form-horizontal m-t-20'} do |form| %> 
+  <% if subject.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(subject.errors.count, "error") %> prohibited this subject from being saved:</h2>
+
+      <ul>
+      <% subject.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ <div class="form-group" style="margin: 5px">
+    <%= form.label 'subject code' %>
+    <%= form.text_field :sub_code, id: :student_sub_code, :class => 'form-control' %>
+  </div>
+
+  <div class="form-group" style="margin: 5px">
+    <%= form.label 'class' %>
+    <%= grouped_collection_select(:subject, :clazz_id, Department.all, :clazzs, :dept_name, :id, :class_code,{:prompt=>'Select a class'} , {:class => 'form-control'})%>
+
+    </div>
+<div class="form-group" style="margin: 5px">
+    <%= form.label 'subject name' %>
+    <%= form.text_field :sub_name, id: :student_sub_name, :class => 'form-control' %>
+  </div>
+  <div class="actions">
+    <%= form.submit 'Submit', :class => 'btn btn-default'%>
+  </div>
+<% end %>

@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+<div class="container-c">
+<div class="card-box">
+<div class="text-center">
+<h1>Profile Details</h1>
+</div>
+<div class="card-box text-left">
+<p>
+  <strong>Nom:</strong>
+  <%= @teacher.nom %>
+</p>
+
+<p>
+  <strong>Prenoms:</strong>
+  <%= @teacher.prenoms %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @teacher.password %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+   <% if session[:status] == "1"%>
+   <div class="text-danger"> Super Admin</div>
+   <% else%>
+   <div class="text-warning"> Teacher</div>
+   <%end%>
+</p>
+
+<%= link_to 'Edit', edit_teacher_path(@teacher), :class => 'btn btn-default'%> 
+</div>
+</div>
+</div>
+
+
+

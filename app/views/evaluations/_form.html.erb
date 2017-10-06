@@ -1,0 +1,30 @@
+
+
+<%= form_with(model: evaluation, local: true) do |form| %>
+  <% if evaluation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(evaluation.errors.count, "error") %> prohibited this evaluation from being saved:</h2>
+
+      <ul>
+      <% evaluation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="field">
+ 
+</div>
+ <div class= "equestions">
+ 
+  <%= form.fields_for :equestions do |builder| %>
+    <%= render 'equestion_fields', f: builder %>
+  <% end %>
+  </div>
+
+  <div class="actions text-center">
+    <%= form.submit 'Submit', name: "commit", value: "Submit", :class => 'btn btn-default'%>
+    <%= form.submit 'Save',name: "commit",value: "Save", :class => 'btn btn-primary' %>
+    
+  </div>
+<% end %>

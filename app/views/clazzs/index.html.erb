@@ -1,0 +1,35 @@
+ <p id="notice"><%= notice %></p>
+
+<h1>Classes</h1>
+<div class="card-box">
+<table id="datatable" class="table table-striped table-bordered"> 
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Class code</th>
+      <th>Department</th>
+      <th>Level</th>
+      <th class="col-xs-3 col-sm-2">Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @clazzs.each do |clazz| %>
+      <tr>
+      <td><%= clazz.id%></td>
+        <td><%= clazz.class_code %></td>
+        <td><%= clazz.department.dept_name%></td>
+        <td><%= clazz.level %></td>
+         <td><div class="col-sm-4"><%= link_to 'Show', clazz %></div>
+        <div class="col-sm-4"><%= link_to edit_clazz_path(clazz) do%><i class="fa fa-pencil"></i>   <% end %></div>
+        <%= link_to clazz, method: :delete, data: { confirm: 'Are you sure?' } do%><i class="fa fa-trash"></i> <% end %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to new_clazz_path , :class => 'btn btn-default' do%><i class="fa fa-plus"></i> New Class<% end %>
+
+</div>
+
+<br>
+

@@ -1,0 +1,31 @@
+<div class="container-c">
+<div class="card-box text-center">
+<p>
+  <strong>Title:</strong>
+  <%= @test.title %>
+</p>
+<p>
+  <strong>Subject name:</strong>
+  <%= Subject.find(@test.subject_id).sub_code %>
+ -
+  <%= Subject.find(@test.subject_id).sub_name %>
+</p>
+<p>
+  <strong>Objective:</strong>
+  <%= @test.objective %><hr>
+
+  
+  <% if !@evals.nil? %>
+    <% if @evals.complete? %>
+     <a href="/tests/<%=@test.id%>/evaluations/new" class="btn btn-primary">Start new Evaluation</a>
+    <% else %>
+     <p>You have a previously saved evaluation</p>
+     <a href="/evaluations/<%=@evals.id%>/edit" class="btn btn-primary">Continue Evaluation</a>
+     <a href="/tests/<%=@test.id%>/evaluations/new" class="btn btn-primary">Start new Evaluation</a>
+
+    <% end%>
+  <% else %>
+   
+  <% end%>
+  </div>
+  </div>

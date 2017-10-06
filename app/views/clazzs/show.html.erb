@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Class Code:</strong>
+  <%= @clazz.class_code %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= Department.find(@clazz.department_id).dept_name %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @clazz.level %>
+</p>
+
+<%= link_to 'Edit', edit_clazz_path(@clazz) %> |
+<%= link_to 'Back', clazzs_path %>

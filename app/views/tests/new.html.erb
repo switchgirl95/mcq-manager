@@ -1,0 +1,14 @@
+<h1 class="page-title">Create Test</h1>
+<!--<div class="card-box">
+<h2>Import Test</h2>-->
+<% if false %>
+<%= form_tag import_tests_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+<% end %>
+
+<!--</div>-->
+<%= render 'form', test: @test %>
+
+

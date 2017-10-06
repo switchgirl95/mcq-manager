@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>Code:</strong>
+  <%= @subject.sub_code %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @subject.sub_name %>
+</p>
+<p>
+  <strong>class:</strong>
+  <%= Clazz.find(@subject.clazz_id).class_code %>
+</p>
+
+
+<%= link_to 'Edit', edit_subject_path(@subject) %> |
+<%= link_to 'Back', subjects_path %>

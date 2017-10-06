@@ -1,0 +1,36 @@
+<fieldset class="nested-fields">
+<div class=" card-box">
+<div class="panel-heading" style="position: relative">
+                                        <h3 class="panel-title"><%= f.label :question, "question" %><br /></h3><%= link_to_remove_association "x", f,  :class=>'btn btn-danger btn-sm x'%>
+                                    </div>
+<div class="panel-body">
+  <%= f.text_area :question, :rows => "1", :class=>"autoExpand"%><br />
+
+  <div class= "answers">
+  <table class="table">
+    <thead>
+    <tr>
+
+  <th class="col-xs-8">Answer</th>
+
+ 
+  <th class="col-xs-3">Correct Answer?</th>
+  <th class="col-xs-2">Delete</th>
+    </tr>
+    </thead>
+    
+  </table>
+  <%= f.fields_for :answers do |builder| %>
+  
+    
+    
+  
+    <tr><%= render 'answer_fields', f: builder %></tr>
+   
+  <% end %>
+  </div>
+  <%= link_to_add_association "+ Add Answer",f,:answers, data:{association_insertion_method: :append}, :class=>'btn btn-default btn-custom'%>
+  
+  </div>
+</div>
+</fieldset>

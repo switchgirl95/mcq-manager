@@ -1,0 +1,66 @@
+ <p id="notice"><%= notice %></p>
+ <div class="container-c">
+ <div class="text-center">
+<p>
+  <strong>Title:</strong>
+  <%= @evaluation.test.title %>
+</p>
+<p>
+  <strong>Subject name:</strong>
+  <%= @evaluation.test.subject.sub_name %>
+</p>
+<p>
+  <strong>Score:</strong>
+  <%= @evaluation.score %>
+</p>
+</div>
+</div>
+<% @evaluation.equestions.each.with_index do |question, index| %>
+<%if question.totalgot*1.0 / question.totalcorr >=0.5 %>
+  <div class="panel panel-border panel-custom">
+<%elsif %> 
+  <div class="panel panel-border panel-danger"> 
+<%end %>
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Question <%= index+1%></h3>
+                                    </div>
+
+<div class="panel-body">
+      
+<p><%= question.question %></p><hr/>
+      <% question.eanswers.each do |answer| %>
+
+      <% if answer.ticked? %>
+          <% if answer.correct? %>
+          <div class="checkbox checkbox-custom">
+                                                <input id="checkbox10" disabled="" checked="" type="checkbox">
+                                                <label for="checkbox10">
+                                                    <p class="text-custom"><%= answer.ans_name %></p>
+                                                </label>
+                                            </div>
+          <% elsif !answer.correct? %>
+          <div class="checkbox checkbox-danger">
+                                                <input id="checkbox10" disabled="" checked="" type="checkbox">
+                                                <label for="checkbox10">
+                                                    <p class="text-danger"><%= answer.ans_name %></p>
+                                                </label>
+                                            </div>
+          <% else %>
+
+          <% end %>
+       
+      <% else %>
+      <div class="checkbox">
+                                                <input disabled="" checked="" type="checkbox">
+                                                <label >
+                                                    <p><%= answer.ans_name %></p>
+                                                </label>
+                                            </div>
+      <% end %>
+      </p>
+      
+      <% end %>
+      </div>
+</div>
+<% end %>
+

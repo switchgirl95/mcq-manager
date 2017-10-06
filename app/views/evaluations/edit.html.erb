@@ -1,0 +1,11 @@
+<div class="container-c">
+<div class="text-center"><h1><%=@evaluation.test.title%></h1>
+<h2><%=@evaluation.test.subject.sub_name%></h2>
+<h3><%=@evaluation.test.objective%></h3>
+</div>
+
+</div><hr/>
+
+
+<%= render 'form', evaluation: @evaluation %>
+

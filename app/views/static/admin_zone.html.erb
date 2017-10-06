@@ -1,0 +1,178 @@
+<h1>Admin Zone</h1>
+<div class="card-box"> 
+                                <ul class="nav nav-tabs navtab-bg nav-justified"> 
+                                   
+                                    <li class="active"> 
+                                        <a href="#messages1" data-toggle="tab" aria-expanded="true"> 
+                                            <span class="visible-xs"><i class="fa fa-envelope-o"></i></span> 
+                                            <span class="hidden-xs">Classes</span> 
+                                        </a> 
+                                    </li> 
+                                    <li class=""> 
+                                        <a href="#profile1" data-toggle="tab" aria-expanded="false"> 
+                                            <span class="visible-xs"><i class="fa fa-user"></i></span> 
+                                            <span class="hidden-xs">Departments</span> 
+                                        </a> 
+                                    </li> 
+                                    
+                                    <li class=""> 
+                                        <a href="#settings1" data-toggle="tab" aria-expanded="false"> 
+                                            <span class="visible-xs"><i class="fa fa-cog"></i></span> 
+                                            <span class="hidden-xs">Students</span> 
+                                        </a> 
+                                    </li> 
+                                     <li class=""> 
+                                        <a href="#home1" data-toggle="tab" aria-expanded="false"> 
+                                            <span class="visible-xs"><i class="fa fa-home"></i></span> 
+                                            <span class="hidden-xs">Subjects</span> 
+                                        </a> 
+                                    </li> 
+                                    <li class=""> 
+                                        <a href="#settings2" data-toggle="tab" aria-expanded="false"> 
+                                            <span class="visible-xs"><i class="fa fa-cog"></i></span> 
+                                            <span class="hidden-xs">Teachers</span> 
+                                        </a> 
+                                    </li> 
+                                </ul> 
+                                <div class="tab-content"> 
+                                    <div class="tab-pane" id="home1"> 
+                                        <table id="datatable" class="table table-striped table-bordered">
+                                              <thead>
+                                                <tr>
+                                                  <th>Code</th>
+                                                  <th>Name</th>
+                                                  <th>Class</th>
+                                                 <th class="col-xs-3 col-sm-2">Action</th>
+                                                </tr>
+                                              </thead>
+
+                                              <tbody>
+                                                <% Subject.all.each do |subject| %>
+                                                  <tr>
+                                                    <td><%= subject.sub_code %></td>
+                                                    <td><%= subject.sub_name %></td>
+                                                    <td><%= Clazz.find(subject.clazz_id).class_code %></td>
+                                                    <td><div class="col-sm-4"><%= link_to 'Show', subject %></div>
+                                                    <div class="col-sm-4"><%= link_to edit_subject_path(subject) do%><i class="fa fa-pencil"></i>   <% end %></div>
+                                                    <%= link_to subject, method: :delete, data: { confirm: 'Are you sure?' } do%><i class="fa fa-trash"></i> <% end %></td>
+                                                  </tr>
+                                                <% end %>
+                                              </tbody>
+                                            </table>
+                                            <%= link_to new_subject_path , :class => 'btn btn-default' do%><i class="fa fa-plus"></i> New Subject<% end %>
+
+                                    </div> 
+                                    <div class="tab-pane" id="profile1"> 
+                                       <table id="datatable" class="table table-striped table-bordered">
+                                          <thead>
+                                            <tr>
+                                              <th>Code</th>
+                                              <th>Name</th>
+                                              <th class="col-xs-3 col-sm-2">Action</th>
+                                            </tr>
+                                          </thead>
+
+                                          <tbody>
+                                            <% Department.all.each do |department| %>
+                                              <tr>
+                                                <td><%= department.dept_code %></td>
+                                                <td><%= department.dept_name %></td>
+                                                <td><div class="col-sm-4"><%= link_to 'Show', department %></div>
+                                                <div class="col-sm-4"><%= link_to edit_department_path(department) do%><i class="fa fa-pencil"></i>   <% end %></div>
+                                                <%= link_to department, method: :delete, data: { confirm: 'Are you sure?' } do%><i class="fa fa-trash"></i> <% end %></td>
+                                              </tr>
+                                            <% end %>
+                                          </tbody>
+                                        </table>
+                                        <%= link_to new_department_path , :class => 'btn btn-default' do%><i class="fa fa-plus"></i> New Department<% end %>
+
+                                    </div> 
+                                    <div class="tab-pane active" id="messages1"> 
+                                        <table id="datatable" class="table table-striped table-bordered"> 
+                                              <thead>
+                                                <tr>
+                                                  <th>Id</th>
+                                                  <th>Class code</th>
+                                                  <th>Department</th>
+                                                  <th>Level</th>
+                                                  <th class="col-xs-3 col-sm-2">Action</th>
+                                                </tr>
+                                              </thead>
+
+                                              <tbody>
+                                                <% Clazz.all.each do |clazz| %>
+                                                  <tr>
+                                                  <td><%= clazz.id%></td>
+                                                    <td><%= clazz.class_code %></td>
+                                                    <td><%= clazz.department.dept_name%></td>
+                                                    <td><%= clazz.level %></td>
+                                                     <td><div class="col-sm-4"><%= link_to 'Show', clazz %></div>
+                                                    <div class="col-sm-4"><%= link_to edit_clazz_path(clazz) do%><i class="fa fa-pencil"></i>   <% end %></div>
+                                                    <%= link_to clazz, method: :delete, data: { confirm: 'Are you sure?' } do%><i class="fa fa-trash"></i> <% end %></td>
+                                                  </tr>
+                                                <% end %>
+                                              </tbody>
+                                            </table>
+                                            <%= link_to new_clazz_path , :class => 'btn btn-default' do%><i class="fa fa-plus"></i> New Class<% end %>
+
+                                    </div> 
+                                    <div class="tab-pane" id="settings1"> 
+                                        <table id="datatable" class="table table-striped table-bordered">
+                                              <thead>
+                                                <tr>
+                                                  <th>Matricule</th>
+                                                  <th>Nom</th>
+                                                  <th>Prenoms</th>
+                                                  
+                                                  <th>Class</th>
+                                                  <th class="col-xs-3 col-sm-2">Action</th>
+                                                </tr>
+                                              </thead>
+
+                                              <tbody>
+                                                <% Student.all.each do |student| %>
+                                                  <tr>
+                                                    <td><%= student.matricule %></td>
+                                                    <td><%= student.nom %></td>
+                                                    <td><%= student.prenoms %></td>
+                                                    
+                                                    <td><%= student.clazz.class_code %></td>
+                                                    <td><div class="col-sm-4"><%= link_to 'Show', student %></div>
+                                                    <div class="col-sm-4"><%= link_to edit_student_path(student) do%><i class="fa fa-pencil"></i>   <% end %></div>
+                                                    <%= link_to student, method: :delete, data: { confirm: 'Are you sure?' } do%><i class="fa fa-trash"></i> <% end %></td>
+                                                  </tr>
+                                                <% end %>
+                                              </tbody>
+                                            </table>
+                                    </div> 
+                                    <div class="tab-pane" id="settings2"> 
+                                        <table id="datatable" class="table table-striped table-bordered">
+                                          <thead>
+                                            <tr>
+                                              <th>Id</th>
+                                              <th>Nom</th>
+                                              <th>Prenoms</th>
+                                              
+                                              <th>Status</th>
+                                               <th class="col-xs-3 col-sm-2">Action</th>
+                                            </tr>
+                                          </thead>
+
+                                          <tbody>
+                                            <% Teacher.all.each do |teacher| %>
+                                              <tr>
+                                                <td><%= teacher.id %></td>
+                                                <td><%= teacher.nom %></td>
+                                                <td><%= teacher.prenoms %></td>
+                                               
+                                                <td><%= teacher.status %></td>
+                                                <td><div class="col-sm-4"><%= link_to 'Show', teacher %></div>
+                                                <div class="col-sm-4"><%= link_to edit_teacher_path(teacher) do%><i class="fa fa-pencil"></i>   <% end %></div>
+                                                <%= link_to teacher, method: :delete, data: { confirm: 'Are you sure?' } do%><i class="fa fa-trash"></i> <% end %></td>
+                                              </tr>
+                                            <% end %>
+                                          </tbody>
+                                        </table>
+                                    </div> 
+                                </div> 
+                            </div>

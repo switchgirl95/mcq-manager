@@ -1,0 +1,2 @@
+module FokeysHelper
+end

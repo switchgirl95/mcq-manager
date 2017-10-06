@@ -1,0 +1,57 @@
+ <%= form_with(model: test, local: true) do |form| %>
+  <% if test.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(test.errors.count, "error") %> prohibited this test from being saved:</h2>
+
+      <ul>
+      <% test.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="row">  
+<div class="col-xs-10 col-xs-offset-1 card-box">
+<h4 class="m-t-0 header-title"><b>General Information</b></h4>
+<p class="text-muted m-t-15 m-b-5 font-13">
+                         Insert<code>
+                            associated subject</code>,<code>
+                            Test title</code> and <code>
+                            Test Objective</code> here
+                          .
+                        </p>
+  <div class="form-group">
+
+   <%= collection_select(:test, :subject_id, Subject.all, :id, :sub_name, {:prompt=>true} ,{:class => 'form-control'})%>
+  </div>
+  <div class="form-group">
+   
+    <%= form.text_field :title, id: :test_title,:placeholder=>'Title', :class => 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    
+    <%= form.text_area :objective, id: :test_objective, :class=>"autoExpand", :rows => "1",:placeholder=>'Objective', :class => 'form-control'%>
+
+  </div>
+  <div class="form-group">
+  <%=select("test", "evalnum",(1..20).to_a, {prompt: 'Number of questions per evaluation'}, {:class => 'form-control'})%>
+  </div>
+</div>
+</div>
+
+
+  <div class= "questions">
+  <%= form.fields_for :questions do |builder| %>
+  
+    <%= render 'question_fields', f: builder %>
+  
+  <% end %>
+  </div>
+  <div class="actions">
+   <%= link_to_add_association "+ Add Question",form,:questions, data:{association_insertion_node: '.questions', association_insertion_method: :append}, :class=>'btn btn-default' %>
+
+    <%= form.submit 'submit' ,:class=>'btn btn-default btn-primary'%>
+     
+  </div>
+<% end %>

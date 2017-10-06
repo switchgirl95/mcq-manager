@@ -1,0 +1,50 @@
+<%= form_for @student, html: {"data-parsley-validate" => '',:class => 'form-horizontal m-t-20'} do |form| %> 
+<% if student.errors.any? %>
+  <% if student.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
+
+      <ul>
+      <% student.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>
+  <div class="form-group" style="margin: 5px">
+    <%= form.label :matricule %>
+    <%= form.text_field :matricule, id: :student_matricule, :class => 'form-control' %>
+  </div>
+
+  <div class="form-group" style="margin: 5px">
+    <%= form.label :nom %>
+    <%= form.text_field :nom, id: :student_nom, :class => 'form-control' %>
+  </div>
+
+  <div class="form-group" style="margin: 5px">
+    <%= form.label :prenoms %>
+    <%= form.text_field :prenoms, id: :student_prenoms, :class => 'form-control'%>
+  </div>
+
+  <div class="form-group" style="margin: 5px">
+    <%= form.label :password %>
+    <%= form.text_field :password, id: :student_password, :class => 'form-control' %>
+  </div>
+  <div class="col-sm-12">
+  <div class="form-group col-sm-4">
+  <%= form.label :class_id %>
+  <%= grouped_collection_select(:student, :clazz_id, Department.all, :clazzs, :dept_name, :id, :class_code,{:prompt=>'Select a class'} , {:class => 'form-control'})%>
+  </div>
+  </div>
+  <!--
+  <div class="form-group">
+    < form.label :clazz_id >
+    < form.text_field :clazz_id, id: :student_id_clazz >
+  </div>
+  -->
+
+  <div class="actions">
+    <%= form.submit 'Submit', :class => 'btn btn-default'%>
+  </div>
+<% end %>

@@ -1,0 +1,19 @@
+<fieldset class="nested-fields">
+
+  <div class="row" style="margin-top: 10px">
+	 <div class="col-xs-8">
+	  <%= f.text_area :ans_name, :class=>"autoExpand", :rows => "1"%>
+	 </div> 
+	 <div class="col-xs-3">
+	  <div class="checkbox checkbox-single checkbox-circle checkbox-primary">
+	  <%= f.check_box :correct %>
+	  <label></label>
+
+	  </div>
+	  </div>
+
+	 
+	  <div class="col-xs-1">
+	   <%= link_to_remove_association "x", f,:class=>'btn btn-sm btn-danger btn-custom '%>
+	  </div>
+</fieldset>
