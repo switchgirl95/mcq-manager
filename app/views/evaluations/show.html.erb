@@ -10,8 +10,11 @@
   <%= @evaluation.test.subject.sub_name %>
 </p>
 <p>
-  <strong>Score:</strong>
-  <%= @evaluation.score %>
+ <%if @evaluation.score*1.0 / @evaluation.total >= 0.5 %>
+  <h2 class="text-custom"><%= @evaluation.score %> / <%= @evaluation.total %></h2>
+ <% else %>
+  <h2 class="text-danger"><%= @evaluation.score %> / <%= @evaluation.total %></h2>
+ <% end %>
 </p>
 </div>
 </div>
@@ -51,7 +54,7 @@
        
       <% else %>
       <div class="checkbox">
-                                                <input disabled="" checked="" type="checkbox">
+                                                <input disabled="" unchecked="" type="checkbox">
                                                 <label >
                                                     <p><%= answer.ans_name %></p>
                                                 </label>

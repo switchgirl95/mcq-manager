@@ -1,6 +1,6 @@
 class EvaluationsController < ApplicationController
   before_action :set_evaluation, only: [:show, :edit, :update, :destroy]
-  before_action :require_access, only:[:show]
+  #before_action :require_access, only:[:show]
 
   # GET /evaluations
   # GET /evaluations.json
@@ -19,7 +19,15 @@ class EvaluationsController < ApplicationController
     #@evaluation.questions = Test.find(16).questions
     #
    @evaluation = Evaluation.create(test_id: params[:test_id], student_id: current_user.id)#, questions: Test.find(16).questions)
-   @questions = Test.find(params[:test_id]).questions
+   @questionss = Test.find(params[:test_id]).questions
+   @questions = []
+   @choice = (0..@questionss.length-1).to_a
+   Test.find(@evaluation.test_id).evalnum.times do
+     
+     @toto = rand(0..@choice.length-1)
+     @questions << @questionss[@choice[@toto]]
+     @choice.delete_at(@toto)
+    end
    @eanswers = []
    @equestions = []
    @questions.each do |question|
@@ -51,13 +59,14 @@ class EvaluationsController < ApplicationController
     
     
       if @evaluation.save
-        if params[:commit] == 'A'
-        @evaluation.complete = true 
-        redirect_to @evaluation
-        
-        elsif params[:commit] == 'B'
-            @evaluation.complete = false
-            redirect_to '/mysubjects'
+        if params[:commit] == 'Submit'
+           @evaluation.update_attribute(:complete,true)
+
+         redirect_to @evaluation
+       elsif params[:commit] == 'Save'
+           @evaluation.update_attribute(:complete,false)
+
+         redirect_to '/mysubjects'
         end
         
       else
@@ -74,10 +83,11 @@ class EvaluationsController < ApplicationController
 
       if @evaluation.update(evaluation_params)
        if params[:commit] == 'Submit'
-         @evaluation.complete = true 
+         @evaluation.update_attribute(:complete,true)
+
          redirect_to @evaluation
        elsif params[:commit] == 'Save'
-         @evaluation.complete = false
+         @evaluation.update_attribute(:complete,false)
          redirect_to '/mysubjects'
         end
       else

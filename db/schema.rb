@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170921065919) do
+ActiveRecord::Schema.define(version: 20171007120219) do
 
   create_table "answers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "question_id"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20170921065919) do
     t.datetime "updated_at", null: false
     t.float "score", limit: 24
     t.boolean "complete"
+    t.integer "total"
     t.index ["student_id"], name: "index_evaluations_on_student_id"
     t.index ["test_id"], name: "index_evaluations_on_test_id"
   end

@@ -23,7 +23,7 @@
 														<div class="portlet">
 																<div class="portlet-heading portlet-default">
 																		<h3 class="portlet-title text-dark">
-																				Total Attemps: 3 | Overall average: 80%
+																				Total Attemps: <%= Evaluation.where(test_id:a.id).count%> 
 																		</h3>
 																																				<div class="portlet-widgets">
 																				<a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
@@ -41,17 +41,19 @@
 											<tr>
 												<th data-field="id" data-sortable="true" data-formatter="invoiceFormatter">Student Id</th>
 												
-												<th data-field="date" data-sortable="true" data-formatter="dateFormatter">Score</th>
 												
-												<th data-field="status" data-align="center" data-sortable="true" data-formatter="statusFormatter">Status</th>
+												
+												<th data-field="status" data-align="center" data-sortable="true" data-formatter="statusFormatter">Score</th>
+												<th data-field="status" data-align="center" data-sortable="true" data-formatter="statusFormatter">Completed</th>
 											</tr>
 										</thead>
 										
 										<tbody>
-										<% Evaluation.where(test_id: a.id).select(:student_id).distinct.each do |b| %>
+										<% Evaluation.where(test_id: a.id,complete: true).each do |b| %>
 											<tr class="accordion-toggle" data-toggle="collapse" data-target='#<%=b.student_id%>'>
-												<td><%=b.student_id%></td>
-												<td><%=a.id%></td>
+												<td><%=Student.find(b.student_id).nom%> <%Student.find(b.student_id).prenoms%></td>
+												<td><%=b.score%></td>
+												<td><%=b.last_touched%></td>
 												
 											
 											

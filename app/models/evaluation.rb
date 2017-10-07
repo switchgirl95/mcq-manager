@@ -8,14 +8,25 @@ class Evaluation < ApplicationRecord
   def calculate
    	puts 'calculating...'
     self.score = 0
+    self.total = 0
     self.equestions.each do |quest|
     	quest.eanswers.each do |ans|
+        if ans.correct
+          self.total +=1
+        else
+        end
     		if ans.ticked && ans.correct
     			puts 'correct!'
     			self.score +=1
-    		else
+    		elsif ans.ticked && !ans.correct
+          self.score -=1
+        else
     		end
     	end
+    end
+    if self.score <0
+      self.score = 0
+    else
     end
   end
 end

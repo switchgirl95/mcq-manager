@@ -16,6 +16,7 @@
   <%= @test.objective %>
   </h4>
 </p><hr/>
+
 <% @test.questions.each do |question| %>
   <div class="card-box">
       <p><b><%= question.question.html_safe %></b></p><hr/>
