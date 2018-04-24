@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171007120219) do
+ActiveRecord::Schema.define(version: 20180424172209) do
 
   create_table "answers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "question_id"
@@ -52,11 +52,11 @@ ActiveRecord::Schema.define(version: 20171007120219) do
 
   create_table "eanswers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "equestion_id"
-    t.string "ans_name"
     t.boolean "ticked"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "correct"
+    t.string "ans_name"
     t.index ["equestion_id"], name: "index_eanswers_on_equestion_id"
   end
 
@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(version: 20171007120219) do
     t.text "question"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "quest_id"
     t.integer "totalcorr"
     t.integer "totalgot"
     t.index ["evaluation_id"], name: "index_equestions_on_evaluation_id"
@@ -92,6 +91,12 @@ ActiveRecord::Schema.define(version: 20171007120219) do
     t.datetime "updated_at", null: false
     t.index ["teacher_id"], name: "index_gives_tests_on_teacher_id"
     t.index ["test_id"], name: "index_gives_tests_on_test_id"
+  end
+
+  create_table "levels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -122,7 +127,9 @@ ActiveRecord::Schema.define(version: 20171007120219) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "clazz_id"
+    t.bigint "level_id"
     t.index ["clazz_id"], name: "index_students_on_clazz_id"
+    t.index ["level_id"], name: "index_students_on_level_id"
     t.index ["matricule"], name: "index_students_on_matricule", unique: true
   end
 
@@ -165,5 +172,6 @@ ActiveRecord::Schema.define(version: 20171007120219) do
   end
 
   add_foreign_key "students", "clazzs"
+  add_foreign_key "students", "levels"
   add_foreign_key "tests", "teachers"
 end

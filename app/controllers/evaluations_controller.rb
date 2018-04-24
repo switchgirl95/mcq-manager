@@ -22,7 +22,12 @@ class EvaluationsController < ApplicationController
    @questionss = Test.find(params[:test_id]).questions
    @questions = []
    @choice = (0..@questionss.length-1).to_a
-   Test.find(@evaluation.test_id).evalnum.times do
+   if Test.find(@evaluation.test_id).evalnum > @questionss.length
+     @count = @questionss.length
+   else
+     @count = evalnum
+   end
+   @count.times do
      
      @toto = rand(0..@choice.length-1)
      @questions << @questionss[@choice[@toto]]
